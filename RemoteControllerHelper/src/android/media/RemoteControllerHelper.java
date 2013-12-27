@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.Log;
 
 /*
@@ -22,6 +23,7 @@ public class RemoteControllerHelper{
 	private RemoteController mRemoteController;
 	private Context mContext;
 	private static IAudioService sService;
+	private String TAG = "RemoteControllerHelper";
 	
 	
 	public RemoteControllerHelper(RemoteController remoteController, Context context){
@@ -42,11 +44,11 @@ public class RemoteControllerHelper{
 		return mRemoteController.getRemoteControlClientPackageName();
 	}
 	
-	public boolean setIsRegistered(boolean registered) {
-		return mRemoteController.setIsRegistered(registered);
+	public void setIsRegistered(boolean registered) {
+		mRemoteController.setIsRegistered(registered);
 	}
 	
-	public RcDisplay getRcDisplay() {
+	public IRemoteControlDisplay getRcDisplay() {
 		return mRemoteController.getRcDisplay();
 	}
 	
