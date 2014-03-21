@@ -2,6 +2,8 @@ package android.media;
 
 import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.ServiceManager;
@@ -39,6 +41,12 @@ public class RemoteControllerHelper{
         sService = IAudioService.Stub.asInterface(b);
         return sService;
     }
+	
+	public Intent getCurrentClientIntent() throws NameNotFoundException {
+		if (mRemoteController == null) return null;
+		return mContext.getPackageManager().getLaunchIntentForPackage(mRemoteController.getRemoteControlClientPackageName());
+		
+	}
 	
 	public String getRemoteControlClientPackageName() {
 		return mRemoteController.getRemoteControlClientPackageName();
